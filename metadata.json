@@ -1,0 +1,6 @@
+{
+  "name": "Baba Solar",
+  "description": "Official website for Baba Solar Light - Solar energy solutions, rooftop systems, solar water heaters, pumps, and interactive solar ROI calculator.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

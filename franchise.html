@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Baba Solar — Franchise Program</title>
+  <link rel="icon" href="img/finallogo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --yellow:#fcb900;
+      --dark:#111827;
+      --light:#f9fafb;
+      --text:#374151;
+      --card:#ffffff;
+      --radius:16px;
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:Inter, sans-serif;
+      background:var(--light);
+      color:var(--text);
+      padding:40px 20px 80px;
+    }
+    .wrapper{max-width:1200px;margin:auto;}
+
+    /* HERO */
+    .hero{
+      padding:60px;
+      border-radius:var(--radius);
+      background:linear-gradient(120deg, rgba(252,185,0,0.35), rgba(255,255,255,0.8)), url('img/franchise-hero.jpg') center/cover;
+      box-shadow:0 15px 40px rgba(0,0,0,0.12);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero h1{margin:0;font-size:38px;color:var(--dark);max-width:700px;}
+    .hero p{max-width:650px;margin-top:14px;font-size:17px;line-height:1.7;}
+
+    .tag{
+      display:inline-block;
+      background:var(--yellow);
+      color:black;
+      padding:8px 16px;
+      border-radius:999px;
+      font-weight:700;
+      margin-bottom:18px;
+      font-size:14px;
+    }
+
+    /* HIGHLIGHTS */
+    .highlight-boxes{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:30px;
+    }
+    .h-box{
+      background:var(--card);
+      padding:25px;
+      border-radius:var(--radius);
+      box-shadow:0 10px 28px rgba(0,0,0,0.06);
+      border-left:6px solid var(--yellow);
+    }
+    .h-box h3{margin:0;font-size:20px;color:var(--dark);}    
+    .h-box p{margin-top:10px;line-height:1.7;}
+
+    /* PROCESS */
+    .process{
+      margin-top:45px;
+      background:var(--card);
+      padding:40px;
+      border-radius:var(--radius);
+      box-shadow:0 10px 26px rgba(0,0,0,0.07);
+    }
+    .step-grid{
+      margin-top:24px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+    }
+    .step{
+      background:var(--light);
+      padding:22px;
+      border-radius:var(--radius);
+      text-align:center;
+      border:2px dashed var(--yellow);
+    }
+    .step .num{
+      width:48px;height:48px;background:var(--yellow);
+      border-radius:50%;display:grid;place-items:center;
+      font-weight:800;font-size:18px;color:black;margin:auto;
+    }
+    .step h4{margin:14px 0 6px 0;}
+
+    /* BENEFITS */
+    .benefits{
+      margin-top:45px;
+      padding:40px;
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:0 10px 28px rgba(0,0,0,0.08);
+    }
+    .benefit-list{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:20px;
+    }
+    .b-item{
+      background:var(--light);
+      padding:20px;
+      border-radius:var(--radius);
+      border-left:5px solid var(--yellow);
+    }
+
+    /* CTA FORM */
+    .apply-box{
+      margin-top:40px;
+      background:linear-gradient(135deg, var(--yellow), #ffd54d);
+      padding:40px;
+      border-radius:var(--radius);
+      box-shadow:0 12px 30px rgba(0,0,0,0.09);
+      color:black;
+    }
+    .apply-box h2{margin:0 0 14px 0;font-size:26px;font-weight:800;}
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:15px;
+      margin-top:20px;
+    }
+    input,textarea{
+      width:100%;padding:14px;border-radius:10px;border:1px solid #e5e7eb;font-size:14px;
+    }
+    textarea{min-height:120px;resize:none;grid-column:1/3;}
+    button{
+      padding:14px 20px;border:none;background:black;color:white;font-weight:700;border-radius:10px;cursor:pointer;
+      grid-column:2/3;justify-self:end;
+    }
+
+    /* FAQ */
+    .faq{
+      margin-top:45px;
+      background:var(--card);
+      padding:35px;
+      border-radius:var(--radius);
+      box-shadow:0 10px 28px rgba(0,0,0,0.06);
+    }
+    details{margin-top:14px;background:var(--light);padding:14px;border-radius:10px;}
+    summary{cursor:pointer;font-weight:700;}
+
+    /* Footer */
+    footer{position:fixed;bottom:14px;left:0;right:0;text-align:center;font-size:13px;color:#6b7280;}
+
+    /* Responsive */
+    @media(max-width:900px){
+      .highlight-boxes, .step-grid, .benefit-list {grid-template-columns:1fr;}    
+      .apply-box .form-grid {grid-template-columns:1fr;}    
+      button{grid-column:1/2;width:100%;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <section class="hero">
+    <span class="tag">Baba Solar Franchise Program 2025</span>
+    <h1>Start a profitable solar business with a premium brand trusted across Maharashtra</h1>
+    <p>Join Baba Solar as an official franchise partner and run a high-demand renewable energy business with complete backend support, training, branding, and lead assistance. Perfect for entrepreneurs, electrical contractors, and new investors.</p>
+  </section>
+
+  <div class="highlight-boxes">
+    <div class="h-box">
+      <h3>Low Investment</h3>
+      <p>Start your solar franchise with as low as ₹3–7 lakh depending on location. High ROI structure.</p>
+    </div>
+    <div class="h-box">
+      <h3>99% Market Growth</h3>
+      <p>Solar adoption in India is increasing rapidly — making franchise business extremely profitable.</p>
+    </div>
+    <div class="h-box">
+      <h3>Complete Support</h3>
+      <p>From installation training to marketing creatives — everything provided by Baba Solar.</p>
+    </div>
+  </div>
+
+  <section class="process">
+    <h2>Franchise Onboarding Process</h2>
+    <div class="step-grid">
+      <div class="step"><div class="num">1</div><h4>Apply</h4><p>Submit franchise request form.</p></div>
+      <div class="step"><div class="num">2</div><h4>Screening</h4><p>Team verifies your region & profile.</p></div>
+      <div class="step"><div class="num">3</div><h4>Training</h4><p>Attend 3–5 day accredited program.</p></div>
+      <div class="step"><div class="num">4</div><h4>Launch</h4><p>Start operations with full support.</p></div>
+    </div>
+  </section>
+
+  <section class="benefits">
+    <h2>What You Get as a Baba Solar Franchise Partner</h2>
+    <div class="benefit-list">
+      <div class="b-item"><strong>Sales & Marketing Toolkit</strong><br>Ads, creatives, brochures, branding files.</div>
+      <div class="b-item"><strong>Installation Training</strong><br>Field training + certification for your team.</div>
+      <div class="b-item"><strong>Vendor Tie-ups</strong><br>Access to Tier-1 panels, inverters & batteries.</div>
+      <div class="b-item"><strong>Lead Assistance</strong><br>Shared leads from Baba Solar website.</div>
+      <div class="b-item"><strong>CRM & Dashboard</strong><br>Track customers, quotes, pipeline & progress.</div>
+      <div class="b-item"><strong>Guaranteed Region</strong><br>Local area becomes exclusively assigned to you.</div>
+    </div>
+  </section>
+
+  <section class="apply-box">
+    <h2>Apply for Franchise</h2>
+    <form onsubmit="sendToWhatsApp(event)">
+
+    <!-- <form onsubmit="event.preventDefault();alert('Demo only — Form submitted!')"> -->
+      <div class="form-grid">
+        <input required placeholder="Full Name">
+        <input required placeholder="Phone Number">
+        <input placeholder="Email Address">
+        <input placeholder="City / Region">
+        <textarea placeholder="Describe your background or business experience"></textarea>
+      </div>
+      <button>Submit Application</button>
+    </form>
+  </section>
+
+  <section class="faq">
+    <h2>FAQ — Frequently Asked Questions</h2>
+    <details><summary>What is the expected return on investment?</summary><p>Typically 6–18 months depending on city and lead flow.</p></details>
+    <details><summary>Do you provide marketing support?</summary><p>Yes — Monthly creatives, brochures, pitch decks & ads.</p></details>
+    <details><summary>Who handles installation?</summary><p>Your trained team + Baba Solar technical supervision.</p></details>
+  </section>
+
+</div>
+
+<script>document.getElementById('yr').textContent = new Date().getFullYear()
+
+function sendToWhatsApp(event){
+  event.preventDefault();
+
+  // 👉 WhatsApp number ( +91 ke bina )
+  const whatsappNumber = "917507811401";
+
+  const form = event.target;
+  const name = form.querySelector('input[placeholder="Full Name"]').value;
+  const phone = form.querySelector('input[placeholder="Phone Number"]').value;
+  const email = form.querySelector('input[placeholder="Email Address"]').value;
+  const city = form.querySelector('input[placeholder="City / Region"]').value;
+  const message = form.querySelector('textarea').value;
+
+  const text =
+`Baba Solar Franchise Application
+
+Name: ${name}
+Phone: ${phone}
+Email: ${email}
+City / Region: ${city}
+
+Background / Experience:
+${message}`;
+
+  window.open(
+    `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`,
+    "_blank"
+  );
+}
+
+
+
+
+
+</script>
+
+</body>
+</html>

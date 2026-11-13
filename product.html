@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <!-- FAVICON -->
+<link rel="icon" type="image/png" href="img/finallogo.png">
+<link rel="apple-touch-icon" href="img/finallogo.png">
+<link rel="shortcut icon" href="img/finallogo.png">
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BABA SOLAR products </title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#111;color:#fff;overflow-x:hidden}
+
+/* ================= NAVBAR ================= */
+.navbar{
+  background:linear-gradient(90deg,#0b1625,#0e1d33);
+  padding:20px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.navbar img{height:60px}
+
+.desktop-menu{
+  display:flex;
+  gap:26px;
+}
+.desktop-menu a{
+  color:#fff;
+  text-decoration:none;
+  font-size:15px;
+  font-weight:500;
+}
+.desktop-menu a:hover{color:#1e90ff}
+
+.menu-btn{
+  display:none;
+  font-size:26px;
+  cursor:pointer;
+}
+
+/* ================= OVERLAY ================= */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  opacity:0;
+  visibility:hidden;
+  transition:.3s;
+  z-index:999;
+}
+.overlay.active{
+  opacity:1;
+  visibility:visible;
+}
+
+/* ================= MOBILE MENU ================= */
+.mobile-menu{
+  position:fixed;
+  top:0;
+  right:-320px;
+  width:320px;
+  height:100%;
+  background:linear-gradient(180deg,#081a33,#0e274a);
+  padding:25px;
+  transition:.4s ease;
+  z-index:1000;
+}
+.mobile-menu.active{right:0}
+
+.close-btn{
+  text-align:right;
+  font-size:28px;
+  cursor:pointer;
+}
+
+.mobile-menu ul{
+  list-style:none;
+  margin-top:40px;
+}
+.mobile-menu ul li{
+  padding:18px 0;
+  border-bottom:1px solid rgba(255,255,255,0.15);
+}
+.mobile-menu ul li a{
+  color:#fff;
+  text-decoration:none;
+  font-size:18px;
+  font-weight:500;
+}
+.blink-yellow{
+  color:#f5b301 !important;   /* YELLOW force */
+  font-weight:600;
+  animation: blinkText 1.2s infinite;
+}
+
+@keyframes blinkText{
+  0%   {opacity:1;}
+  50%  {opacity:0.2;}
+  100% {opacity:1;}
+}
+
+/* ================= FOOTER ================= */
+footer{
+  background:#1e2328;
+  padding:70px 60px 30px;
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 2fr 1.5fr 2fr;
+  gap:40px;
+}
+.footer h2{
+  font-size:36px;
+  font-weight:700;
+  border-bottom:3px solid #1e90ff;
+  display:inline-block;
+  padding-bottom:5px;
+}
+.footer p{
+  color:#aaa;
+  font-size:14px;
+  line-height:1.8;
+  margin-top:15px;
+}
+.footer h3{
+  font-size:20px;
+  margin-bottom:20px;
+}
+.footer ul{list-style:none}
+.footer ul li{margin-bottom:12px}
+.footer ul li a{
+  color:#aaa;
+  text-decoration:none;
+}
+.footer ul li a:hover{color:#1e90ff}
+
+.contact li{
+  color:#aaa;
+  font-size:14px;
+  margin-bottom:14px;
+}
+.social a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:42px;
+  height:42px;
+  border:2px solid #1e90ff;
+  color:#1e90ff;
+  border-radius:8px;
+  margin-right:10px;
+  text-decoration:none;
+}
+
+.copy{
+  border-top:1px solid #333;
+  margin-top:40px;
+  padding-top:20px;
+  text-align:center;
+  color:#aaa;
+  font-size:14px;
+}
+.copy span{color:#1e90ff}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:900px){
+  .desktop-menu{display:none}
+  .menu-btn{display:block}
+
+  footer{padding:50px 25px}
+  .footer-grid{grid-template-columns:1fr}
+}
+
+
+/* product page css start  */
+/* ================= PRODUCT PAGE ONLY (UNIQUE) ================= */
+
+.bs-products-root{
+  --bs-blue:#0A2540;
+  --bs-yellow:#F9B233;
+  --bs-bg:#F5F7FA;
+  background:var(--bs-bg);
+  color:#222;
+  font-family:Poppins;
+  margin-top: 0;
+  padding-top: 40px;   /* adjust kar sakte ho */
+}
+
+
+
+.bs-products-container{
+  width:95%;
+  max-width:1200px;
+  margin:auto;
+}
+
+.bs-products-title{
+  margin:25px 0 10px;
+  text-align: center;
+}
+
+.bs-search-box input{
+  display: block;        /* ⭐ important */
+  margin: 0 auto;        /* ⭐ center */
+  text-align: center;
+  width: 90%;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+}
+
+
+.bs-products-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;
+  margin:30px 0;
+}
+
+.bs-product-card{
+  background:#fff;
+  border-radius:14px;
+  padding:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  transition:.35s;
+}
+
+.bs-product-card:hover{
+  transform:translateY(-6px);
+}
+
+.bs-product-card img{
+  width:100%;
+  height:180px;
+  object-fit:contain;
+  margin-bottom:12px;
+}
+
+.bs-product-card h3{
+  font-size:16px;
+  margin:6px 0;
+}
+
+.bs-product-brand{
+  color:var(--bs-blue);
+  font-weight:600;
+  font-size:14px;
+}
+
+.bs-enquiry-btn{
+  display:inline-block;
+  margin-top:12px;
+  padding:9px 16px;
+  background:var(--bs-yellow);
+  color:#000;
+  border-radius:7px;
+  font-size:14px;
+  text-decoration:none;
+  transition:.3s;
+}
+
+.bs-enquiry-btn:hover{
+  background:var(--bs-blue);
+  color:#fff;
+}
+
+.bs-contact-box{
+  background:#fff;
+  padding:40px;
+  margin:60px 0;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+
+/* PRODUCT PAGE CSS END  */
+</style>
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<div class="navbar">
+  <img src="./img/crlogo.png" alt="Baba Solar prod" >
+
+  <div class="desktop-menu">
+    <a href="./index.html">Home</a></li>
+    <a href="index.html#service">Services</a>
+    <a href="./product.html">Products</a>
+    <a href="./about.html">About Us</a>
+    <a href="index.html#contact">Enquiry</a>
+    <a href="./franchise.html">Franchise Program</a>
+    <a href="./solarcalculator.html">Solar Calculator</a>
+  </div>
+
+  <div class="menu-btn" onclick="openMenu()">
+    <i class="fas fa-bars"></i>
+  </div>
+</div>
+
+<!-- OVERLAY -->
+<div class="overlay" onclick="closeMenu()"></div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="close-btn" onclick="closeMenu()">✕</div>
+  <ul>
+    <li><a href="./index.html">Home</a></li>
+    <li><a href="index.html#service">Services</a></li>
+    <li><a href="./product.html">Products</a></li>
+    <li><a href="./about.html">About Us</a></li>
+    <li><a href="index.html#contact">Enquiry</a></li>
+    <li><a href="./franchise.html">Franchise Program</a></li>
+    <li><a href="./solarcalculator.html">Solar Calculator</a></li>
+  </ul>
+</div>
+
+<section class="bs-products-root">
+<div class="bs-products-container">
+
+<h1 class="bs-products-title">Solar Products</h1>
+
+<div class="bs-search-box">
+<input type="text" id="bsSearch" placeholder="Search products...">
+</div>
+
+<div class="bs-products-grid">
+
+<div class="bs-product-card">
+<img src="https://5.imimg.com/data5/SELLER/Default/2023/8/339497053/WU/VZ/JP/1019966/550-watt-adani-solar-panel.jpg">
+<h3>Solar PV Module</h3>
+<div class="bs-product-brand">ADANI</div>
+<a href="index.html#contact" class="bs-enquiry-btn">Enquiry Now</a>
+</div>
+
+<div class="bs-product-card">
+<img src="https://5.imimg.com/data5/SELLER/Default/2022/11/FT/KQ/MF/2630463/grid-tie-solar-inverter.jpg">
+<h3>Grid Connect Solar Inverter MPPT</h3>
+<div class="bs-product-brand">POLYCAB</div>
+<a href="index.html#contact" class="bs-enquiry-btn">Enquiry Now</a>
+</div>
+
+<div class="bs-product-card">
+<img src="https://5.imimg.com/data5/SELLER/Default/2022/3/PC/YO/XF/143395003/acdb-solar-panel.jpg">
+<h3>ACDB with SPD & MCB</h3>
+<div class="bs-product-brand">POLYCAB</div>
+<a href="index.html#contact" class="bs-enquiry-btn">Enquiry Now</a>
+</div>
+
+<div class="bs-product-card">
+<img src="https://5.imimg.com/data5/SELLER/Default/2023/1/XJ/IN/QY/2973284/dcdb-solar-panel.jpg">
+<h3>DCDB with SPD & MCB</h3>
+<div class="bs-product-brand">POLYCAB</div>
+<a href="index.html#contact" class="bs-enquiry-btn">Enquiry Now</a>
+</div>
+
+<div class="bs-product-card">
+<img src="https://5.imimg.com/data5/SELLER/Default/2021/12/JF/FB/YX/118991876/solar-ac-cable.jpg">
+<h3>AC Copper Cable 4 Sqmm</h3>
+<div class="bs-product-brand">POLYCAB</div>
+<a href="index.html#contact" class="bs-enquiry-btn">Enquiry Now</a>
+</div>
+
+<div class="bs-product-card">
+<img src="https://5.imimg.com/data5/SELLER/Default/2022/9/PO/LU/UM/41266531/solar-dc-cable.jpg">
+<h3>DC Cable 4 Sqmm</h3>
+<div class="bs-product-brand">POLYCAB</div>
+<a href="index.html#contact" class="bs-enquiry-btn">Enquiry Now</a>
+</div>
+
+<div class="bs-product-card">
+<img src="https://5.imimg.com/data5/SELLER/Default/2021/4/XE/YL/YM/123755593/down-conductor.jpg">
+<h3>Down Conductor (PVC Pipe Kit)</h3>
+<a href="index.html#contact" class="bs-enquiry-btn">Enquiry Now</a>
+</div>
+
+<div class="bs-product-card">
+<img src="https://5.imimg.com/data5/SELLER/Default/2022/5/ZD/KG/XQ/3485212/earthing-cable.jpg">
+<h3>Earthing Cable AC</h3>
+<div class="bs-product-brand">POLYCAB</div>
+<a href="index.html#contact" class="bs-enquiry-btn">Enquiry Now</a>
+</div>
+
+<div class="bs-product-card">
+<img src="https://5.imimg.com/data5/SELLER/Default/2021/8/KQ/TS/EO/42759438/copper-bonded-earthing-rod.jpg">
+<h3>Earthing Rod – Copper Bonding</h3>
+<a href="index.html#contact" class="bs-enquiry-btn">Enquiry Now</a>
+</div>
+
+<div class="bs-product-card">
+<img src="https://5.imimg.com/data5/SELLER/Default/2022/3/DT/ER/HD/264334/lightning-arrester.jpg">
+<h3>Lightning Arrester</h3>
+<a href="index.html#contact" class="bs-enquiry-btn">Enquiry Now</a>
+</div>
+
+<div class="bs-product-card">
+<img src="https://5.imimg.com/data5/SELLER/Default/2022/7/AV/QZ/TF/71377027/earthing-compound.jpg">
+<h3>Earthing Compound</h3>
+<a href="index.html#contact" class="bs-enquiry-btn">Enquiry Now</a>
+</div>
+
+<div class="bs-product-card">
+<img src="https://5.imimg.com/data5/SELLER/Default/2021/5/VM/AT/GI/813593/solar-installation-kit.jpg">
+<h3>Installation Kit & Connectors</h3>
+<a href="index.html#contact" class="bs-enquiry-btn">Enquiry Now</a>
+</div>
+
+<div class="bs-product-card">
+<img src="https://5.imimg.com/data5/SELLER/Default/2022/6/YJ/BE/DJ/2903001/solar-mounting-structure.jpg">
+<h3>Solar Mounting Structure</h3>
+<a href="index.html#contact" class="bs-enquiry-btn">Enquiry Now</a>
+</div>
+
+<div class="bs-product-card">
+<img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f">
+<h3>Project Registration & Approvals</h3>
+<a href="index.html#contact" class="bs-enquiry-btn">Enquiry Now</a>
+</div>
+
+</div>
+
+
+
+</div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="footer-grid">
+
+    <!-- ABOUT -->
+    <div>
+      <h2>BABA SOLAR</h2>
+      <p>
+        We create spaces that inspire and elevate. From design to execution,
+        our team ensures every project reflects quality, creativity,
+        and sustainability.
+      </p>
+    </div>
+
+    <!-- CONTACT -->
+    <div>
+      <h3>Get In Touch</h3>
+      <ul class="contact">
+        <li>
+          <i class="fa fa-location-dot"></i>
+          Mangrulpir Road, Near Salasar Mangal Karyalay,
+          Karanja (Lad), Maharashtra 444105
+        </li>
+        <li>
+          <i class="fa fa-phone"></i>
+          <a href="tel:9604620074">9604620074</a>,
+          <a href="tel:9168206782">9168206782</a>,
+          <a href="tel:7823883845">7823883845</a>
+        </li>
+        <li>
+          <i class="fa fa-envelope"></i>
+          <a href="mailto:babaagrotraderskaranja@gmail.com">
+            babaagrotraderskaranja@gmail.com
+          </a>
+        </li>
+      </ul>
+
+      <div class="social">
+        <a href="https://www.instagram.com/babaagrotraders?igsh=MXFyZ2hkZ3c5enJtOA==" target="_blank">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.facebook.com/share/1CxuKmnLw8/?mibextid=wwXIfr" target="_blank">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/babaagrotraders?igsh=MXFyZ2hkZ3c5enJtOA==" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.instagram.com/babaagrotraders?igsh=MXFyZ2hkZ3c5enJtOA==" target="_blank">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div>
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Our Projects</a></li>
+        <li><a href="#">Testimonials</a></li>
+        <li><a href="#">Services</a></li>
+      </ul>
+    </div>
+
+    <!-- SERVICES -->
+    <div>
+      <h3>Our Services</h3>
+      <ul>
+        <li><a href="#">Residential Solar</a></li>
+        <li><a href="#">Commercial Solar</a></li>
+        <li><a href="#">Solar Street Lamp</a></li>
+        <li><a href="#">Solar Water Pump</a></li>
+        <li><a href="#">Government Projects</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="copy">
+    <b>
+                © 2025 <span class="text-primary">BABA AGRO TRADERS AND SOLAR</span>. All Rights Reserved.  
+      Designed By <span class="blink-yellow">Sahil Kapse</span>
+    </b>
+  </div>
+</footer>
+
+<script>
+function openMenu(){
+  document.querySelector('.overlay').classList.add('active');
+  document.getElementById('mobileMenu').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeMenu(){
+  document.querySelector('.overlay').classList.remove('active');
+  document.getElementById('mobileMenu').classList.remove('active');
+  document.body.style.overflow='auto';
+}
+
+
+// prodyct scirpt start
+document.getElementById("bsSearch").addEventListener("keyup",function(){
+let v=this.value.toLowerCase();
+document.querySelectorAll(".bs-product-card").forEach(c=>{
+c.style.display=c.innerText.toLowerCase().includes(v)?"block":"none";
+});
+});
+
+//  product script end
+</script>
+
+</body>
+</html>

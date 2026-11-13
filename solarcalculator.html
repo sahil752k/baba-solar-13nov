@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Baba Solar - Solar Calculator</title>
+<meta name="description" content="Premium light-themed solar calculator (pincode + monthly bill). UI tuned for elegant, modern look." />
+<style>
+  :root{
+    --bg:#f6f9fb;
+    --card:#ffffff;
+    --muted:#6b7785;
+    --accent:#0b7a4a; /* deep green */
+    --accent-2:#f1b500; /* warm sun */
+    --glass: rgba(11,122,74,0.06);
+    --soft-shadow: 0 8px 24px rgba(16,24,32,0.08);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;background:var(--bg);color:#102028}
+  .wrap{max-width:1100px;margin:36px auto;padding:28px;border-radius:14px;background:linear-gradient(180deg, var(--card), #fbfcfd);box-shadow:var(--soft-shadow);border:1px solid rgba(16,24,32,0.03)}
+  header{display:flex;gap:16px;align-items:center}
+  .brand{display:flex;gap:14px;align-items:center}
+  .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent-2), #ffb400);display:flex;align-items:center;justify-content:center;font-weight:800;color:#2b2b2b;box-shadow:0 6px 18px rgba(241,181,0,0.08);font-size:20px}
+  h1{font-size:22px;margin:0}
+  .lead{margin:4px 0 0;color:var(--muted);font-size:13px}
+  .cta{margin-left:auto;text-align:right}
+  .cta .muted{font-size:13px;color:var(--muted)}
+
+  .grid{display:grid;grid-template-columns:1fr 420px;gap:22px;margin-top:22px}
+  .card{background:transparent;padding:16px;border-radius:12px}
+
+  .panel{background:var(--card);border-radius:12px;padding:18px;border:1px solid rgba(16,24,32,0.04);box-shadow:0 6px 18px rgba(16,24,32,0.04)}
+  label{display:block;font-size:13px;color:var(--muted);margin-bottom:8px}
+  .input{padding:12px;border-radius:10px;border:1px solid rgba(16,24,32,0.06);background:transparent}
+  input[type="text"], input[type="number"], select{width:100%;background:transparent;border:none;color:inherit;font-size:16px;outline:none}
+
+  .row{display:flex;gap:12px}
+  .btn{background:linear-gradient(180deg,var(--accent),#0b6e42);color:#fff;border:none;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(11,122,74,0.12)}
+  .btn-ghost{background:transparent;border:1px solid #0b7a4a;color:#0b7a4a;padding:9px 12px;border-radius:10px;font-weight:600}
+
+  .muted{color:var(--muted);font-size:13px}
+  .results-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px}
+  .stat{padding:14px;border-radius:12px;background:linear-gradient(180deg,#ffffff, #fbfdff);border:1px solid rgba(16,24,32,0.04);box-shadow:0 6px 16px rgba(16,24,32,0.03)}
+  .small{font-size:13px;color:var(--muted)}
+  .big{font-size:20px;font-weight:800;color:#0f2b1f}
+  .fullwidth{grid-column:1 / -1}
+  .kpi{display:flex;gap:10px;align-items:center}
+  .badge{padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,var(--accent-2), #ffd05a);color:#2b2b2b;font-weight:700}
+
+  .steps{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+  .step{background:#f6fbf7;border-radius:10px;padding:10px;border:1px solid rgba(11,122,74,0.06);min-width:150px;text-align:center}
+
+  footer{margin-top:20px;display:flex;justify-content:space-between;color:var(--muted);font-size:13px}
+  @media (max-width:980px){.grid{grid-template-columns:1fr}.logo{width:56px;height:56px}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <h1>Solar Savings Calculator</h1>
+          <div class="lead">Only pincode & average monthly bill</div>
+        </div>
+      </div>
+      <div class="cta">
+        <div class="muted">Assumptions: 1% degradation • 3% inflation • Tariff ₹9</div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="panel">
+        <h2 style="margin:0 0 8px 0">⚡ Calculate Your Savings</h2>
+        <div class="muted">Enter pin code and average monthly bill to get instant estimates.</div>
+
+        <div style="margin-top:12px">
+          <label for="pincode">Pin code</label>
+          <div class="input"><input id="pincode" type="text" placeholder="e.g. 400066"></div>
+          <div class="muted" id="pincodeMsg" style="margin-top:8px">Serviceable: <strong id="serviceable">Yes</strong></div>
+        </div>
+
+        <div style="margin-top:12px">
+          <label for="monthlyBill">Average monthly electricity bill (₹)</label>
+          <div class="input"><input id="monthlyBill" type="number" min="0" placeholder="Enter bill amount"></div>
+          <div class="muted" style="margin-top:6px">Min ₹500 • Max ₹10,000</div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:14px;align-items:center">
+          <button id="calcBtn" class="btn">Calculate</button>
+          <button id="resetBtn" class="btn-ghost">Reset</button>
+          <div class="muted" style="margin-left:8px">Includes subsidy, EMI preview & environmental impact.</div>
+        </div>
+
+        <hr style="border:none;height:1px;background:rgba(16,24,32,0.03);margin:18px 0;border-radius:2px">
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <div style="min-width:180px">
+            <div class="small">Buy solar at <strong>₹0</strong> downpayment</div>
+            <div style="font-weight:800;margin-top:6px" id="minDown">—</div>
+          </div>
+
+          <div style="min-width:160px">
+            <div class="small">EMI tenure</div>
+            <select id="emiTenure" class="input" style="padding:8px;margin-top:2px">
+              <option value="5">5 years (60 months)</option>
+              <option value="4">4 years (48 months)</option>
+              <option value="3">3 years (36 months)</option>
+            </select>
+          </div>
+        </div>
+
+      </section>
+
+      <aside class="panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+          <div>
+            <h3 style="margin:0">🌞 Your Solar Snapshot</h3>
+            <div class="small">Lifetime horizon: 25 years</div>
+          </div>
+          <div class="kpi"><div class="badge">India-focused</div></div>
+        </div>
+
+        <div id="resultsGrid" class="results-grid">
+          <div class="stat">
+            <div class="small">System Size</div>
+            <div class="big" id="sysSize">— kW</div>
+            <div class="small">🏠 Required roof area: <span id="roofArea">—</span></div>
+          </div>
+
+          <div class="stat">
+            <div class="small">Monthly saving (est.)</div>
+            <div class="big" id="monthlySave">₹ —</div>
+            <div class="small">Year 1</div>
+          </div>
+
+          <div class="stat">
+            <div class="small">Yearly saving (est.)</div>
+            <div class="big" id="yearlySave">₹ —</div>
+          </div>
+
+          <div class="stat">
+            <div class="small">25-year savings</div>
+            <div class="big" id="lifetimeSave">₹ —</div>
+          </div>
+
+          <div class="stat">
+            <div class="small">Total cost of plant</div>
+            <div class="big" id="totalCost">₹ —</div>
+          </div>
+
+          <div class="stat">
+            <div class="small">Central subsidy</div>
+            <div class="big" id="subsidyAmt">-₹ —</div>
+          </div>
+
+          <div class="stat">
+            <div class="small">Net cost</div>
+            <div class="big" id="netCost">₹ —</div>
+          </div>
+
+          <div class="stat">
+            <div class="small">EMI (<span id="emiTenureLabel">60</span> months)</div>
+            <div class="big" id="emiValue">₹ —</div>
+          </div>
+
+          <div class="stat fullwidth" style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div class="small">Your Solar Saves More Than Money</div>
+              <div id="co2" class="big">— Kg CO₂ • — trees</div>
+            </div>
+            <div style="text-align:right">
+              <div class="small">ROI (Year 1)</div>
+              <div id="roi" class="big">— % p.a.</div>
+            </div>
+          </div>
+
+          <div class="stat fullwidth small">
+            <strong>Buy solar at ₹0 downpayment</strong>
+            <div style="margin-top:8px;color:var(--muted)">Minimum Down Payment • Subsidy • Net Down Payment • EMI tenure • EMI (calculated)</div>
+            <div style="display:flex;gap:12px;margin-top:10px">
+              <div class="muted">Minimum Down Payment</div>
+              <div style="font-weight:800;margin-left:auto" id="minDown2">₹ —</div>
+            </div>
+            <div style="display:flex;gap:12px;margin-top:6px">
+              <div class="muted">Subsidy</div>
+              <div style="font-weight:800;margin-left:auto" id="sub2">-₹ —</div>
+            </div>
+            <div style="display:flex;gap:12px;margin-top:6px">
+              <div class="muted">Net Down Payment</div>
+              <div style="font-weight:800;margin-left:auto" id="netDown">₹ 0</div>
+            </div>
+          </div>
+
+          <div class="stat fullwidth small">
+            <strong>Disclaimer:</strong>
+            <div style="margin-top:6px;color:var(--muted)">Monthly, yearly and 5-year Savings have been calculated basis total savings calculated over 25 years. Annual degradation of 1% and 3% annual inflation have been assumed for this calculation. The price/EMI shown is indicative only and considers starting price without after-sales service. The actual cost/EMI of your solar project may vary based on factors such as your city, system variant, panel type, inverter type, available roof space, roof height, discom charges, mounting structure, lender, type of after sales service, savings guarantee, etc.</div>
+          </div>
+        </div>
+
+        <!-- <div style="margin-top:12px">
+          <div class="small">Your Journey with Baba Solar</div>
+          <div class="steps">
+            <div class="step"><strong>1.</strong><div class="small">Calculate Your Savings</div></div>
+            <div class="step"><strong>2.</strong><div class="small">Book a Free Consultation</div></div>
+            <div class="step"><strong>3.</strong><div class="small">Quick & Safe Installation</div></div>
+          </div>
+        </div> -->
+
+      </aside>
+    </main>
+
+    <footer>
+      <div class="muted">© 2025 BABA SOLAR — Rooftop solar made simple</div>
+      <div class="muted">Questions? Call: 9604620074</div>
+    </footer>
+  </div>
+
+<script>
+// Formatting
+const fmt0 = n => new Intl.NumberFormat('en-IN',{maximumFractionDigits:0}).format(n);
+const fmt2 = n => new Intl.NumberFormat('en-IN',{maximumFractionDigits:2}).format(n);
+
+// Mapping (reuse previous tuned values)
+const PIN_MAP = {
+  '400066': { sizeFactor:0.00081, yearlyGenPerKw:2424, roofPerKw:59.259, costPerKw:67901.2346, subsidyRule:{type:'fixed', value:78000}},
+  '444505': { sizeFactor:0.00055, yearlyGenPerKw:2416, roofPerKw:59.25, costPerKw:84700, subsidyRule:{type:'percent', value:0.344}},
+  'default': { sizeFactor:0.00062, yearlyGenPerKw:2400, roofPerKw:60, costPerKw:82000, subsidyRule:{type:'none', value:0}}
+};
+
+const TARIFF = 9; const DEGRADATION = 0.01; const INFLATION = 0.03; const LIFETIME = 25;
+
+function computeEmi(P, annualRate=0.12, years=5){ if(P<=0) return 0; const r=annualRate/12; const n=years*12; const f=Math.pow(1+r,n); return (P * r * f)/(f-1); }
+function getMap(pin){ return PIN_MAP[pin] || PIN_MAP['default']; }
+
+function updateServiceableUI(pin){ const serviced = Object.keys(PIN_MAP); const ok = serviced.includes(pin); document.getElementById('serviceable').innerText = ok ? 'Yes' : 'Not yet'; document.getElementById('pincodeMsg').style.color = ok ? '#0b7a4a' : '#d9534f'; }
+
+// Event wiring
+const pincodeEl = document.getElementById('pincode');
+const monthlyBillEl = document.getElementById('monthlyBill');
+const emiTenureEl = document.getElementById('emiTenure');
+
+pincodeEl.addEventListener('input', e=> updateServiceableUI(e.target.value.trim()));
+emiTenureEl.addEventListener('change', ()=>{ document.getElementById('emiTenureLabel').innerText = Number(emiTenureEl.value)*12; if(document.getElementById('sysSize').innerText !== '— kW') calculate(); });
+
+document.getElementById('resetBtn').addEventListener('click', ()=>{
+  pincodeEl.value='';
+  monthlyBillEl.value='';
+  emiTenureEl.value='5';
+  document.getElementById('emiTenureLabel').innerText='60';
+  updateServiceableUI('');
+  clearResults();
+});
+
+document.getElementById('calcBtn').addEventListener('click', calculate);
+
+function clearResults(){ const ids=['sysSize','roofArea','monthlySave','yearlySave','lifetimeSave','totalCost','subsidyAmt','netCost','emiValue','co2','roi','minDown','minDown2','sub2']; ids.forEach(id=>{ const el=document.getElementById(id); if(el) el.innerText = id==='sysSize' ? '— kW' : (id==='roofArea'?'—': (id==='roi'?'— %':'₹ —')); }); document.getElementById('minDown2').innerText='₹ —'; document.getElementById('netDown').innerText='₹ 0'; }
+
+function calculate(){
+  const pin = (pincodeEl.value||'').trim();
+  const bill = Math.max(0, Number(monthlyBillEl.value) || 0);
+  const cfg = getMap(pin);
+
+  let sizeKw = Math.round((bill * cfg.sizeFactor) * 100)/100; if(sizeKw < 1) sizeKw = 1;
+  const roof = Math.round(sizeKw * cfg.roofPerKw);
+  const totalCost = Math.round(sizeKw * cfg.costPerKw);
+
+  let subsidyAmt = 0; const rule = cfg.subsidyRule || {type:'none'};
+  if(rule.type === 'fixed') subsidyAmt = Math.round(rule.value);
+  else if(rule.type === 'percent') subsidyAmt = Math.round(totalCost * rule.value);
+  else if(rule.type === 'per_kW') subsidyAmt = Math.round(rule.value * sizeKw);
+
+  const netCost = Math.max(0, totalCost - subsidyAmt);
+  const genYear1 = Math.round(sizeKw * cfg.yearlyGenPerKw);
+  const year1Saving = genYear1 * TARIFF; const monthlySaving = year1Saving / 12;
+
+  let lifetimeSavings = 0; for(let y=0;y<LIFETIME;y++){ const gen = genYear1 * Math.pow(1-DEGRADATION,y); const price = TARIFF * Math.pow(1+INFLATION,y); lifetimeSavings += gen * price; }
+
+  const tenureYears = Number(emiTenureEl.value);
+  const emi = computeEmi(netCost, 0.12, tenureYears);
+  const roi = netCost>0 ? (year1Saving / netCost) * 100 : 0;
+
+  const CO2_PER_KWH = 0.82; const co2Ann = Math.round(genYear1 * CO2_PER_KWH); const trees = Math.round(co2Ann / 30);
+
+  const minDown = Math.round(subsidyAmt);
+  const minDownDisplay = minDown>0 ? '₹ '+fmt0(minDown) : '₹ 0';
+
+  document.getElementById('sysSize').innerText = sizeKw + ' kW';
+  document.getElementById('roofArea').innerText = roof + ' sq.ft.';
+  document.getElementById('monthlySave').innerText = '₹ ' + fmt2(monthlySaving);
+  document.getElementById('yearlySave').innerText = '₹ ' + fmt2(year1Saving);
+  document.getElementById('lifetimeSave').innerText = '₹ ' + fmt0(Math.round(lifetimeSavings));
+  document.getElementById('totalCost').innerText = '₹ ' + fmt0(totalCost);
+  document.getElementById('subsidyAmt').innerText = '-₹ ' + fmt0(subsidyAmt);
+  document.getElementById('netCost').innerText = '₹ ' + fmt0(netCost);
+  document.getElementById('emiValue').innerText = emi>0 ? '₹ ' + fmt0(Math.round(emi)) : '₹ 0';
+  document.getElementById('roi').innerText = fmt2(roi) + ' %';
+  document.getElementById('co2').innerText = co2Ann + ' Kg • ' + trees + ' trees';
+  document.getElementById('minDown').innerText = minDownDisplay; document.getElementById('minDown2').innerText = minDownDisplay; document.getElementById('sub2').innerText = '-₹ ' + fmt0(subsidyAmt);
+  document.getElementById('netDown').innerText = '₹ 0';
+  updateServiceableUI(pin);
+}
+
+// init
+window.addEventListener('load', ()=>{ updateServiceableUI(document.getElementById('pincode').value||''); document.getElementById('emiTenureLabel').innerText = Number(document.getElementById('emiTenure').value) * 12; calculate(); });
+</script>
+</body>
+</html>
